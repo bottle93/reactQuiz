@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import MainStore from './stores/MainStore'
+import { Provider, observer } from 'mobx-react';
+import QuizMain from './components/QuizMain'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    mainStore = new MainStore();
+    render() {
+        const mainStore = this.mainStore;
+        return (
+            <Provider mainStore={mainStore}>
+                <div className="App">
+                    <QuizMain/>
+                </div>
+            </Provider>
+
+        );
+    }
+
 }
 
-export default App;
+export default observer(App);
