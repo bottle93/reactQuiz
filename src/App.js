@@ -1,23 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
-import MainStore from './stores/MainStore'
-import { Provider, observer } from 'mobx-react';
-import QuizMain from './components/QuizMain'
+import QuizMain from './components/QuizMain';
+import QuizStore from './stores/QuizStore'
 
 class App extends Component {
-    mainStore = new MainStore();
     render() {
-        const mainStore = this.mainStore;
         return (
-            <Provider mainStore={mainStore}>
-                <div className="App">
-                    <QuizMain/>
-                </div>
-            </Provider>
-
+            <div className="App">
+                <QuizMain store={new QuizStore()}/>
+            </div>
         );
     }
-
 }
 
-export default observer(App);
+export default App;

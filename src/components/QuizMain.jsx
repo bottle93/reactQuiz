@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import { inject, observer } from 'mobx-react';
+import {observer} from "mobx-react";
+import {observable} from "mobx";
 
 @observer class QuizMain extends Component {
-
-    componentDidMount() {
-
+    componentWillMount() {
+        this.props.store.loadCategories()
     }
-
     render() {
         return(
-            <div>Hello Sunshine!</div>
+            <div>
+                <p>Hello Sunshine!</p>
+                <div>{console.log(this.props.store.categories)}</div>
+            </div>
         )
     }
 }
