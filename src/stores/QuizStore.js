@@ -4,17 +4,24 @@ import axios from "axios";
 
 export default class QuizStore {
     @observable loading = true;
+    @observable categories = [];
     @observable selectedCategory = {};
 
     @action
-    loadCategories() {
+    async loadCategories() {
         this.loading = true;
-        const categories = axios.get('https://opentdb.com/api_category.php')
-            .then(response => {console.log('response: ', response.data.trivia_categories); return response.data.trivia_categories});
-        runInAction(() => {
-            Object.assign(this, categories);
-            this.loading = false;
-        })
+        try {
+            const categories = await axios.get('https://opentdb.com/api_category.php');
+            runInAction(() => {
+                this.loading = false;
+                this.categories = categories.data.trivia_categories;
+            });
+        }
+        catch (error){
+            runInAction(() => {
+                return error
+            })
+        }
     }
 
     @action
