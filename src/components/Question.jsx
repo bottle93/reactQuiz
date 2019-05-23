@@ -16,9 +16,9 @@ class Question extends Component {
                             <input
                                 type="radio"
                                 id={this.props.questionId}
-                                name={this.props.questionId}
+                                name={this.props.title}
                                 value={answer}
-                                onChange={value => this.props.checkedAnswer(value)}
+                                onChange={(e) => {this.props.handleChange(e, this.props.correct)}}
                             />
                             <label
                                 id={this.props.questionId}

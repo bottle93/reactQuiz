@@ -9,25 +9,18 @@ import Question from './Question'
         this.props.store.loadQuestions();
     }
 
+
+
     displayButtons() {
         return(
             <div>
                 <button
-                    className={'button--previous'}
-                    onClick={() => this.props.store.previousQuestion()}
-                >Prev
-                </button>
-                <button
                     className={'button--next'}
-                    onClick={() => this.props.store.nexQuestion()}
+                    onClick={() => this.props.store.onUserClick()}
                 >Next
                 </button>
             </div>
         )
-    }
-
-    checkedAnswer(value) {
-        this.props.store.answers
     }
 
     render() {
@@ -41,9 +34,9 @@ import Question from './Question'
                             <Question
                                 title={question.question}
                                 questionId={index}
-                                checkedAnswer={this.checkedAnswer}
                                 incorrect={question.incorrect_answers}
                                 correct={question.correct_answer}
+                                handleChange={this.props.store.handleChange}
                             />
                             {this.displayButtons()}
                         </div>
@@ -54,7 +47,7 @@ import Question from './Question'
         }
 
         return (
-            <div>{displayQuestions}</div>
+            <form>{displayQuestions}</form>
         )
     }
 }

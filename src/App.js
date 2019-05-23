@@ -6,7 +6,7 @@ import './App.css';
 import QuizMain from './components/QuizMain';
 import QuizStart from './components/QuizStart'
 import QuizStore from './stores/QuizStore';
-import Question from "./components/Question";
+
 
 
 const store = new QuizStore();
