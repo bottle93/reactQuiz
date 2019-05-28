@@ -18,6 +18,7 @@ export default class QuizStore {
     @observable currentQuestion = 0;
 
     //answers
+    @observable selected = false;
     @observable answer = {};
     @observable answersList = [];
     @observable correctCount = 0;
@@ -63,28 +64,24 @@ export default class QuizStore {
     }
 
     @action
-    nexQuestion() {
-        console.log(this.answersList);
+    nextQuestion() {
         if(this.currentQuestion < this.questionsList.length-1) {
+            this.selected = false;
             return this.currentQuestion++
-        }
-
-    }
-
-    @action
-    previousQuestion() {
-        if(this.currentQuestion > 0) {
-            return this.currentQuestion--
         }
     }
 
     @action
     handleChange = (e, correctAnswer) => {
+        this.selected = true;
         return this.changeAnswerData(e.target.name, e.target.value, correctAnswer)
-    }
+    };
 
     @action
     changeAnswerData(question, answer, correct) {
+        if(answer === correct) {
+            this.correctCount++
+        }
         return this.answer = {
             'question': question,
             'answer': answer,
@@ -94,16 +91,28 @@ export default class QuizStore {
 
     @action
     updateUserAnswersList() {
-    const answer = this.answer;
-    this.answersList.push(answer)
+        const answer = this.answer;
+        this.answersList.push(answer)
     }
 
     @action
     onUserClick() {
         this.updateUserAnswersList();
-        this.nexQuestion()
+        this.nextQuestion();
+        console.log(this.currentQuestion)
     }
 
+    @action
+    playAgain() {
+        this.selectedCategory = {};
+        //questions
+        this.questionsList = [];
+        this.currentQuestion = 0;
+        //answers
+        this.answer = {};
+        this.answersList = [];
+        this.correctCount = 0;
+    }
 
 }
 

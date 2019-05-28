@@ -6,7 +6,9 @@ import {Link} from 'react-router-dom'
 @inject('store')
 @observer class QuizMain extends Component {
     componentWillMount() {
-        this.props.store.loadCategories()
+        if(this.props.store.categoryList.length === 0){
+            this.props.store.loadCategories()
+        }
     }
     render() {
         const store= this.props.store;
@@ -14,30 +16,33 @@ import {Link} from 'react-router-dom'
         if(store.loading === false) {
             displayCategories = store.categoryList.map(category => {
                 return(
-                    <button
+                    <div
+                        className='quiz__category-item'
                         key={category.id}
                         onClick={() => store.selectCategory(category)}
                     >
-                        {category.name}
-                    </button>
+                        {category.name.replace('Entertainment: ','')}
+                    </div>
                 )
             });
         }
 
         return(
             <div>
-                <h1>Awesssome Quiz</h1>
-                <div>
+                <h1 className='quiz__title'>Awesssome Quiz</h1>
+                <div className='quiz__categories'>
                     {store.selectedCategory.name
                         ? (
-                            <div>
-                                <h1>{store.selectedCategory.name}</h1>
-                                <Link to='/start'>Go!</Link>
+                            <div className='quiz__category--selected'>
+                                <h1 className='quiz__category-name'>{store.selectedCategory.name}</h1>
+                                <Link to='/start' className='quiz__link'>Go!</Link>
                             </div>
                         )
-                        : (<div>Choose category!</div>)}
+                        : (<div className='quiz__choose'>Choose category!</div>)}
                 </div>
-                {displayCategories}
+                <div className='quiz__categories-list'>
+                    {displayCategories}
+                </div>
             </div>
         )
     }
