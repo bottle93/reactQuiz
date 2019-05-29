@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Provider } from 'mobx-react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import DevTools from 'mobx-react-devtools';
-import './App.css';
+import './styles/App.scss'
 import QuizMain from './components/QuizMain';
 import Quiz from './components/Quiz'
 import QuizStore from './stores/QuizStore';

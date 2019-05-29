@@ -1,4 +1,5 @@
 import {observable, action, runInAction} from 'mobx'
+
 import axios from "axios";
 
 
@@ -53,7 +54,14 @@ export default class QuizStore {
             const questions = await axios.get(`https://opentdb.com/api.php?amount=10&category=${categoryId}&type=multiple`);
             runInAction(() => {
                 this.loading = false;
-                this.questionsList = questions.data.results
+                let results = questions.data.results;
+                results = results.map(question => {
+                    let answers = [...question.incorrect_answers];
+                    answers.push(question.correct_answer);
+                    question.answers = answers.slice().sort(() => Math.random() - 0.5);
+                    return question
+                });
+                this.questionsList = results
             });
         }
         catch (error){
@@ -99,7 +107,6 @@ export default class QuizStore {
     onUserClick() {
         this.updateUserAnswersList();
         this.nextQuestion();
-        console.log(this.currentQuestion)
     }
 
     @action

@@ -17,7 +17,10 @@ import {Link} from 'react-router-dom'
             displayCategories = store.categoryList.map(category => {
                 return(
                     <div
-                        className='quiz__category-item'
+                        className={store.selectedCategory.id === category.id
+                            ? 'main__category-item main__category-item--selected'
+                            : 'main__category-item'
+                        }
                         key={category.id}
                         onClick={() => store.selectCategory(category)}
                     >
@@ -28,21 +31,21 @@ import {Link} from 'react-router-dom'
         }
 
         return(
-            <div>
-                <h1 className='quiz__title'>Awesssome Quiz</h1>
-                <div className='quiz__categories'>
-                    {store.selectedCategory.name
-                        ? (
-                            <div className='quiz__category--selected'>
-                                <h1 className='quiz__category-name'>{store.selectedCategory.name}</h1>
-                                <Link to='/start' className='quiz__link'>Go!</Link>
-                            </div>
-                        )
-                        : (<div className='quiz__choose'>Choose category!</div>)}
-                </div>
-                <div className='quiz__categories-list'>
+            <div className='main__main'>
+                <h1 className='main__title'>Awesssome Quiz</h1>
+                <div className='main__categories-list'>
                     {displayCategories}
                 </div>
+                <div className='main__categories'>
+                    {store.selectedCategory.name
+                        ? (
+                            <div className='main__category--selected'>
+                                <Link to='/start' className='main__link'>Go!</Link>
+                            </div>
+                        )
+                        : (<div className='main__choose'>Choose category!</div>)}
+                </div>
+
             </div>
         )
     }

@@ -1,0 +1,44 @@
+.summary {
+  &__answers-list {
+    text-align: center;
+  }
+
+  &__user-answer {
+    margin-top: 20px;
+  }
+
+  &__score {
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 2rem;
+  }
+
+  &__question-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__answer-correct {
+    margin-top: 5px;
+    color: green;
+  }
+  &__correct-answer-provided {
+    margin-top: 5px;
+    color: green;
+
+  }
+  &__answer-provided {
+    margin-top: 5px;
+    color: red;
+  }
+
+  &__button--replay {
+    padding: 10px 20px;
+    background-color: gainsboro;
+    margin: 10px;
+    border-radius: 15px;
+    text-align: center;
+   a {
+     text-decoration: none;
+   }
+  }
+}

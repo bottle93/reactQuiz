@@ -1,0 +1,48 @@
+.main {
+  &__main {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 5rem;
+  }
+
+  &__categories-list {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__category-item {
+    margin: 10px 20px;
+    padding: 5px;
+    border-radius: 15px;
+    flex-basis: 25%;
+    background-color: gainsboro;
+    text-align: center;
+  }
+
+  &__category-item:hover {
+    background-color: palegoldenrod;
+  }
+
+  &__category-item--selected {
+    background-color: yellowgreen;
+  }
+  &__link {
+    padding: 10px 50px;
+    background-color: firebrick;
+    color: whitesmoke;
+    margin: 40px;
+    border-radius: 15px;
+    text-decoration: none;
+  }
+}

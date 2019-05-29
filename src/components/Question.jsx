@@ -1,36 +1,40 @@
 import React, {Component} from 'react';
+import he from 'he'
+
 
 class Question extends Component {
     render() {
-        let answersList = this.props.incorrect;
-        if (!answersList.includes(this.props.correct)) {
-            answersList.push(this.props.correct);
-        }
-        answersList.slice().sort(() => Math.random() - 0.5);
+
         return(
-            <div>
-                <h1>{this.props.title.replace(/&quot;/g,'"')} {this.props.questionId+1}/10</h1>
-                {answersList.map((answer, id) => {
-                    return (
-                        <div
-                            key={id}
-                            id={this.props.questionId}
-                        >
-                            <label
+            <div className='quiz__question'>
+                <h1 className='quiz__question-text'>
+                    {he.decode(this.props.title)} {this.props.questionId+1}/10
+                </h1>
+                <div className='quiz__question-variants-list'>
+                    {this.props.answersList.map((answer, id) => {
+                        return (
+                            <div
+                                className='quiz__question-variant'
+                                key={id}
                                 id={this.props.questionId}
-                                className={answer === this.props.correct ? 'correctAnswer' : 'incorrect'}>
+                            >
                                 <input
                                     type="radio"
-                                    id={this.props.questionId}
+                                    id={'var' + (this.props.questionId + id)}
+                                    className='quiz__question-answer-input'
                                     name={this.props.title}
                                     value={answer}
                                     onChange={(e) => {this.props.handleChange(e, this.props.correct)}}
                                 />
-                                {answer.replace(/&quot;/g,'"')}
-                            </label>
-                        </div>
-                    )
-                })}
+                                <label
+                                    htmlFor={'var' + (this.props.questionId + id)}
+                                    className='quiz__question-answer-label'>
+                                    {he.decode(answer)}
+                                </label>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

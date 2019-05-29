@@ -13,6 +13,7 @@ import QuizSummary from './QuizSummary'
     render() {
         const store= this.props.store;
         let displayQuestion;
+
         if(store.questionsList.length > 0) {
             let questionId = store.currentQuestion;
             let question = store.questionsList[questionId];
@@ -21,15 +22,15 @@ import QuizSummary from './QuizSummary'
                     <Question
                         title={question.question}
                         questionId={questionId}
-                        incorrect={question.incorrect_answers}
                         correct={question.correct_answer}
+                        answersList={question.answers}
                         handleChange={store.handleChange}
                     />
                     <button
                         disabled={!store.selected}
                         className={'quiz__button--next'}
                         onClick={() => store.onUserClick()}
-                    >Next
+                    >Next Question
                     </button>
                 </div>
             )
